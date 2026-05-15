@@ -1,2 +1,2 @@
 # Aquaculture
-A suitability analysis for oyster aquaculture on the East Coast (USA) using R. 
+A suitability analysis for oyster aquaculture on the East Coast (USA) using R and ArcGIS Pro. 
