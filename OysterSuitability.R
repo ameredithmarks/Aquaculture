@@ -1,6 +1,18 @@
-# --- TNC Aquaculture Scientist Portfolio Project ---
-# Goal: Identify Restorative Oyster Aquaculture Sites in NC
-# Tools: sf, terra, tidyverse
+### --- TNC Aquaculture Scientist Portfolio Project ---
+## Goal: Identify Restorative Oyster Aquaculture Sites in NC
+## Tools: sf, terra, tidyverse
+## Data Sources & Attribution
+# 1. Sea Surface Temperature (SST)
+* **Dataset Name:** Multi-scale Ultra-high Resolution (MUR) Sea Surface Temperature Analysis (v4.1)
+* **Data Provider:** NASA Jet Propulsion Laboratory (JPL) Physical Oceanography Distributed Active Archive Center (PO.DAAC)
+* **Short Identifier:** `jplMURSST41`
+* **Resolution:** Global 0.01° grid (roughly 1 km spatial resolution, aggregated/resampled for project use)
+# 2. Sea Surface Salinity (SSS)
+* **Dataset Name:** World Ocean Atlas 2023 (WOA23), Volume 2: Salinity
+* **Data Provider:** NOAA National Centers for Environmental Information (NCEI)
+* **Short Identifier / File Name:** `woa23_decav_s06_01.nc`
+* **Resolution:** Global 1° grid (resampled/cropped via R `terra` for local project bounds)
+
 
 library(sf)
 library(terra)
