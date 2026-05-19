@@ -19,7 +19,8 @@ Then, I struggled to find neat data layers for oceanographic data to pull into A
   - downloaded as polygon layer
 - Storm Surge Risk Maps for Category 1/2 Hurricanes (SLOSH Model)- National Hurricane Center, NOAA
   - downloaded as raster layers
-- Waterbodies - NHD
+- Waterbodies - NHD via Esri Living Atlas 
+- Coastline - NOAA Shoreline Data Explorer
 
 ## Clean and QC Data
 - Added a field for VA and NC Shellfish Safety layers as a binary attribute addressing regulatory status. VA only notes waters that are closed, anything else is open. NC notes waters that are open and closed to harvesting. NC/VA polygon files were merged.
@@ -29,5 +30,6 @@ Then, I struggled to find neat data layers for oceanographic data to pull into A
 ## Buffering and Vector > Raster
 - The Navigation Channels received a buffer of 100m to avoid designating shipping lanes as suitable for oyster farming. Then this polygon layer was rasterized. 
 - The finalized Shellfish Safety and Waterbody Union was rasterized based on its regulatory score field.
+- The merged Shoreline line layer (N35W80 and N30W80) was buffered at 500m to look at suitable areas to locate oysters for the co-benefit of wave attenuation during hurricane storm surge. 
 
   
