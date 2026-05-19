@@ -8,17 +8,17 @@ Then, I struggled to find neat data layers for oceanographic data to pull into A
 ## Here is an overview of the next steps in my ArcGIS Pro workflow:
 ## Source & Download Data
 - Sea Surface Temperature (SST) - NOAA's Physical Sciences Laboratory
--   cleaned in R
+  - Data from 2025, cleaned in R
 - Salinity Data - NOAA's National Centers for Environmental Information (NCEI)
--   cleaned in R
+  - Data from 2015-2022, cleaned in R
 - North Carolina Shellfish Growing Area Classifications - NCDEQ GIS Open Data Portal
--   downloaded as polygon layer
+  - downloaded as polygon layer
 - Virginia Shellfish Safety - Virginia Department of Health
--   downloaded as KML file
+  - downloaded as KML file
 - Navigation Channels - US Army Corps of Engineers
--   downloaded as polygon layer
+  - downloaded as polygon layer
 - Storm Surge Risk Maps for Category 1/2 Hurricanes (SLOSH Model)- National Hurricane Center, NOAA
--   downloaded as raster layers
+  - downloaded as raster layers
 - Waterbodies - NHD
 
 ## Clean and QC Data
