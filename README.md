@@ -27,7 +27,7 @@ Then, I struggled to find neat data layers for oceanographic data to pull into A
 - In order to capture open areas in VA, a waterbodies dataset was imported, clipped to the study area, irrelevant waterbodies were removed (dams/lakes/etc) and those areas were given a value of 1 if they were not noted in the VA datset. Then, a union was performed on the waterbodies layer and the NC/VA Shellfish layer.
 - Salinity and SST were interpolated to match the study area, as they did not cover bays/sounds/estuaries. Both layers were then resampled using bilinear interpolation to match the finer resolution (~10m) of the SLOSH Storm Surge Maps.
 
-## Buffering and Vector > Raster
+## Buffering and Vector to Raster
 - The Navigation Channels received a buffer of 100m to avoid designating shipping lanes as suitable for oyster farming. Then this polygon layer was rasterized. 
 - The finalized Shellfish Safety and Waterbody Union was rasterized based on its regulatory score field.
 - The merged Shoreline line layer (N35W80 and N30W80) was buffered at 500m to look at suitable areas to locate oysters for the co-benefit of wave attenuation during hurricane storm surge. 
