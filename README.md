@@ -20,16 +20,20 @@ Then, I struggled to find neat data layers for oceanographic data to pull into A
 - Storm Surge Risk Maps for Category 1/2 Hurricanes (SLOSH Model)- National Hurricane Center, NOAA
   - downloaded as raster layers
 - Waterbodies - NHD via Esri Living Atlas 
-- Coastline - NOAA Shoreline Data Explorer
+- Coastline - NOAA Shoreline Data Explorer (Downloaded, but not sure if I'll end up using it)
 
 ## Clean and QC Data
 - Added a field for VA and NC Shellfish Safety layers as a binary attribute addressing regulatory status. VA only notes waters that are closed, anything else is open. NC notes waters that are open and closed to harvesting. NC/VA polygon files were merged.
 - In order to capture open areas in VA, a waterbodies dataset was imported, clipped to the study area, irrelevant waterbodies were removed (dams/lakes/etc) and those areas were given a value of 1 if they were not noted in the VA datset. Then, a union was performed on the waterbodies layer and the NC/VA Shellfish layer.
 - Salinity and SST were interpolated to match the study area, as they did not cover bays/sounds/estuaries. Both layers were then resampled using bilinear interpolation to match the finer resolution (~10m) of the SLOSH Storm Surge Maps.
+- Since this resulting resolution was quite high (is it too high? Maybe!), I only looked at the pixels closest to the shoreline in the SLOSH layers.
+- The merged shoreline files (both N35W80 and N30W80) were simplified using a simplification tolerance of 30m and the Douglas-Peucker algorithm to reduce processing requirements.
 
-## Buffering and Vector to Raster
-- The Navigation Channels received a buffer of 100m to avoid designating shipping lanes as suitable for oyster farming. Then this polygon layer was rasterized. 
+## Workflow Tasks
+- The Navigation Channels received a buffer of 100m to avoid designating shipping lanes as suitable for oyster farming.
+    - This polygon layer was then rasterized. 
 - The finalized Shellfish Safety and Waterbody Union was rasterized based on its regulatory score field.
-- The merged Shoreline line layer (N35W80 and N30W80) was buffered at 500m to look at suitable areas to locate oysters for the co-benefit of wave attenuation during hurricane storm surge. 
+- The simplified shoreline was buffered at 500m and then clipped with the NHD Waterbodies polygon layer so than only those areas in the water within 500m of shore are selected.
+
 
   
