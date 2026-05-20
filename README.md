@@ -31,9 +31,29 @@ Then, I struggled to find neat data layers for oceanographic data to pull into A
 
 ## Workflow Tasks
 - The Navigation Channels received a buffer of 100m to avoid designating shipping lanes as suitable for oyster farming.
-    - This polygon layer was then rasterized. 
+- The simplified shoreline was buffered at 500m and then clipped with the NHD Waterbodies polygon layer so than only those areas in the water within 500m of shore are selected. *This had a major problem! Swamp/Marsh areas were not deleted with the initial Waterbodies cleaning and this resulted in lots of small lakes nearly 80 miles from the coast being included in the dataset.
+  - To remedy this, I used Select by Location and selected those areas that were farther than 1 km from the shoreline. This helped, but still wasn't a perfect match because there were some "holes" in the shoreline data that would result in deletion of areas approved for harvest (in the Pamlico Sound, for example). So, with the select by location selection highlighted, I manually removed those inland areas still lit up (Pocosin Lakes, for example) and added those areas that were missed by the shoreline location selection (like the Pamlico Sound). This was definitely a disappointing setback and took a long time to rectify manually.
+- Next, I ran distance allocation on the SLOSH Cat 1 inundation raster with my new Nearshore Oyster Zone layer as a mask. This produced a layer in the water (of my Nearshore Oyster Zone) that had the value of the nearest SLOSH inundation pixel, showing the areas of water where nearby land has high inundation risk.
+
+### Reclassification and Rasterization
 - The finalized Shellfish Safety and Waterbody Union was rasterized based on its regulatory score field.
-- The simplified shoreline was buffered at 500m and then clipped with the NHD Waterbodies polygon layer so than only those areas in the water within 500m of shore are selected.
+- A field was added to the Channel Buffer Layer to show that each area inside a polygon has a score of 0, so that in the final raster calculation, these areas will be excluded from ideal oyster areas.
+- SLOSH Inundation reclass Matrix comes from the idea that a small oyster reef may help attenuate *some* wave energy, but probably not a 15 foot storm surge. Ideally, an oyster reef would help mitigate 5-8 feet of inundation, while 0-2 feet can usually be handled by the existing environment since it's about the same as a high tide. 
+  - 0-2 feet: 1
+  - 3-4 feet: 3
+  - 5-8 feet: 5
+  - 9-11 feet: 3
+  - 12-15 feet: 1
+-Both SST and Salinity were reclassified to a scale where 5 is optimal and 1 is poor, using basics of oyster biology/habitat needs. 
+- Salinity was reclassified using the following table:
+    14	28	5
+    28	35	3
+    35	50	1
+-  Sea Surface Temperature was reclassified using the following table:
+    6   10	1
+    10	15	2
+    15	20	3
+    20	23	4
+    23	25	5
 
-
-  
+   
