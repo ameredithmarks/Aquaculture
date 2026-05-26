@@ -58,4 +58,10 @@ Then, I struggled to find neat data layers for oceanographic data to pull into A
     - (Reclass_SST * .25 + Reclass_SAL *.35 + Reclass_SLOSH *.40) * Final_Channel_Mask
     - This excludes navigational channels from the final raster by giving them a 0 value. The other parameters were given relatively equal weights, but since the SST and Salinity were not expected to change too much over the study area, the SLOSH was given the greatest weight. 
 
-   
+## Results
+The resulting product is a raster file where the value of each pixel represents its suitability for oyster aquaculture, based on the parameters. The table below contains the summary acreage for the entire study area - where 0 is closed, 1 is unsuitable, 2 is marginal, 3 is suitable, and 4 is optimal. 
+    0	59197
+    1	1619
+    2	1078553
+    3	6804323
+    4	4514884
