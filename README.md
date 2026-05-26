@@ -36,8 +36,7 @@ Then, I struggled to find neat data layers for oceanographic data to pull into A
 - Next, I ran distance allocation on the SLOSH Cat 1 inundation raster with my new Nearshore Oyster Zone layer as a mask. This produced a layer in the water (of my Nearshore Oyster Zone) that had the value of the nearest SLOSH inundation pixel, showing the areas of water where nearby land has high inundation risk.
 
 ### Reclassification and Rasterization
-- The finalized Shellfish Safety and Waterbody Union was rasterized based on its regulatory score field.
-- A field was added to the Channel Buffer Layer to show that each area inside a polygon has a score of 0, so that in the final raster calculation, these areas will be excluded from ideal oyster areas.
+- A field was added to the Channel Buffer Layer to show that each area inside a polygon has a score of 0, so that in the final raster calculation, these areas will be excluded from ideal oyster areas. This layer was then rasterized. 
 - SLOSH Inundation reclass Matrix comes from the idea that a small oyster reef may help attenuate *some* wave energy, but probably not a 15 foot storm surge. Ideally, an oyster reef would help mitigate 5-8 feet of inundation, while 0-2 feet can usually be handled by the existing environment since it's about the same as a high tide. 
   - 0-2 feet: 1
   - 3-4 feet: 3
@@ -46,14 +45,17 @@ Then, I struggled to find neat data layers for oceanographic data to pull into A
   - 12-15 feet: 1
 -Both SST and Salinity were reclassified to a scale where 5 is optimal and 1 is poor, using basics of oyster biology/habitat needs. 
 - Salinity was reclassified using the following table:
-    14	28	5
-    28	35	3
-    35	50	1
+  - 14	28	5
+  - 28	35	3
+  - 35	50	1
 -  Sea Surface Temperature was reclassified using the following table:
-    6   10	1
-    10	15	2
-    15	20	3
-    20	23	4
-    23	25	5
+  -  6   10	1
+  -  10	15	2
+  -  15	20	3
+  -  20	23	4
+  -  23	25	5
+- The finalized Shellfish Safety and Waterbody Union was used as a mask on the final raster calcuation. The Raster Calculation for the Final Oysters Suitability Raster was:
+    - (Reclass_SST * .25 + Reclass_SAL *.35 + Reclass_SLOSH *.40) * Final_Channel_Mask
+    - This excludes navigational channels from the final raster by giving them a 0 value. The other parameters were given relatively equal weights, but since the SST and Salinity were not expected to change too much over the study area, the SLOSH was given the greatest weight. 
 
    
